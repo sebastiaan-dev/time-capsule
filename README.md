@@ -45,15 +45,19 @@ GET `/capsules`
 #### Response
 ```json
 {
-opened_capsules: [{
-	title: string,
-	message: string,
-	date: DateTime
-}],
-closed_capsule: {
-	next_time: DateTime,
-	total_count: number
-}
+  "opened_capsules": [
+    {
+      "title": "string",
+      "message": "string",
+      "date": "DateTime"
+    },
+    {},
+    {}
+  ],
+  "closed_capsule": {
+    "next_time": "DateTime",
+    "total_count": "number"
+  }
 }
 ```
 or
