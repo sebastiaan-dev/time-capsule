@@ -1,16 +1,16 @@
-# time-capsule
+# Time Capsule
 
 ## Todo
-- frontend
-- api
-- database
-- uml diagram
-- dockerfiles
+- [ ] frontend
+- [ ] api
+- [ ] database
+- [ ] uml diagram
+- [ ] dockerfiles
   
-- kubernetes yaml schemas
-- microk8s deployment
-- certificate management
-- TLS
+- [ ] kubernetes yaml schemas
+- [ ] microk8s deployment
+- [ ] certificate management
+- [ ] TLS
 
 ## Frontend
 - Create a time capsule
@@ -18,9 +18,9 @@
 	- Message -> text
 	- DateTime to open the capsule -> DateTime
 ## API
-Hostname: `api.time-capsule.io`
+Hostname: `api.timecapsule.io`
 ### Create
-POST `/capsule`
+POST `/timecapsule`
 - limit title, message length
 - 100 years limit
 #### Request
@@ -38,9 +38,9 @@ POST `/capsule`
 }
 ```
 ### Capsules
-GET `/capsules`
+GET `/timecapsule`
 #### Request
-`/capsules?start=number&limit=number`
+`/timecapsule?start=number&limit=number`
 - Limit needs constraint
 #### Response
 ```json
