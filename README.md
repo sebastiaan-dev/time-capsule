@@ -68,3 +68,10 @@ or
 ```
 ### Database
 Start is offset, limit is amount of items per query result. Sort by newest expired/opened capsule to oldest.
+
+#### Decision
+- NoSQL can scale horizontally, SQL vertically. Ideally, we scale horizontally as much as possible for our entire arch. However, this is not requirement for the persistent DB layer in the project.
+- Relational DB Management System (RDBMS) makes sense because we want to keep the option open to allow timecapsules to relate to specific users in the future.
+- MySQL is Oracle owned, PostgreSQL has a strong ecosystem and is open source; complying to Cloud Native Definition: "The Cloud Native Computing Foundation seeks to drive adoption of this paradigm by fostering and sustaining an ecosystem of open source, vendor-neutral projects.".
+- Postgres allows more complex data types, which may be nice. Also concurrency is achieved by multiversion concurrency control (MVCC) instead of write-locks, which helps if this application would scale to multiple users that are creating concurrent connections.
+- Choice: PostgreSQL.
