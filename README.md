@@ -75,3 +75,21 @@ Start is offset, limit is amount of items per query result. Sort by newest expir
 - MySQL is Oracle owned, PostgreSQL has a strong ecosystem and is open source; complying to Cloud Native Definition: "The Cloud Native Computing Foundation seeks to drive adoption of this paradigm by fostering and sustaining an ecosystem of open source, vendor-neutral projects.".
 - Postgres allows more complex data types, which may be nice. Also concurrency is achieved by multiversion concurrency control (MVCC) instead of write-locks, which helps if this application would scale to multiple users that are creating concurrent connections.
 - Choice: PostgreSQL.
+
+```sql
+-- Create the "timecapsule_prod" database
+CREATE DATABASE timecapsule_prod;
+
+-- Connect to the "timecapsule-prod" database
+\c timecapsule_prod;
+
+-- Create the "timecapsules" table
+CREATE TABLE timecapsules (
+    id serial PRIMARY KEY,
+    title text NOT NULL,
+    message text NOT NULL,
+    date timestamp
+);
+```
+
+https://stackoverflow.com/a/40031181
