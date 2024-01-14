@@ -19,7 +19,7 @@ TABLE_NAME: str = "timecapsules"
 ## Build and run
 ```bash
 docker build -t uvicorn-api-image .
-docker run -d --name uvicorn-api-container -p 80:80 uvicorn-api-image
+docker run -d --name uvicorn-api-container --network time-capsule-network -p 80:80 uvicorn-api-image 
 ```
 
 ## Documentation
