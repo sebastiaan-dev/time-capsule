@@ -5,13 +5,13 @@
 - [ ] Future timecapsule titles should not be displayed.
 
 ## Configuration
-Edit the app/config.py file, entering the configuration about database:
+If we switch from Docker network to some other solution, it is important to change `config.py` accordingly. 
 
 ```python
 DB_USERNAME: str = "postgres"
 DB_PASSWD: str = "s3cr3tp4ssw0rd"
 DB_NAME: str = "timecapsule_prod"
-DB_HOST: str = "127.0.0.1"
+DB_HOST: str = "postgres-db-container"
 DB_PORT: int = 5432
 TABLE_NAME: str = "timecapsules"
 ```
