@@ -27,6 +27,9 @@ async def create_capsule(item: schemas.CapsuleCreate, db: Session = Depends(get_
         return {"code": param_message_error.code, "message": param_message_error.message, "data": None}
     if item.date - datetime.now(timezone.utc) > timedelta(days=settings.MAX_EXPIRE_DAY):
         return {"code": param_expire_error.code, "message": param_title_error.message, "data": None}
+    if item.date < datetime.now(timezone.utc):
+        return {"code": param_date_invalid.code, "message": param_date_invalid.message, "data": None}
+
     result = crud.create_capsule(db=db, title=item.title, message=item.message, date=item.date)
     if result is not None:
         return {"code": success.code, "message": success.message, "data": result}
@@ -44,6 +47,7 @@ async def get_capsule(start: int = 0, limit: int = 100, db: Session = Depends(ge
         if capsule.date < datetime.now():
             opened_capsules.append(capsule)
         else:
+            capsule.title = None
             capsule.message = None
             closed_capsules.append(capsule)
 
