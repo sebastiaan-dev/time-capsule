@@ -1,5 +1,6 @@
 from collections import namedtuple
 from .config import settings
+
 Response = namedtuple('Response', ['code', 'message'])
 
 success = Response(1000, "Success")

@@ -5,14 +5,12 @@ from app.database import SessionLocal, engine
 from app.code import *
 from datetime import datetime, timedelta, timezone
 
-
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title=settings.PROJECT_NAME,
-    openapi_url=f"{settings.API_V1_STR}/openapi.json"
-)
-
+        title=settings.PROJECT_NAME,
+        openapi_url=f"{settings.API_V1_STR}/openapi.json"
+        )
 
 def get_db():
     db = SessionLocal()
@@ -20,7 +18,6 @@ def get_db():
         yield db
     finally:
         db.close()
-
 
 @app.post("/timecapsule")
 async def create_capsule(item: schemas.CapsuleCreate, db: Session = Depends(get_db)):
@@ -59,4 +56,4 @@ async def get_capsule(start: int = 0, limit: int = 100, db: Session = Depends(ge
         "opened_capsules": opened_capsules,
         "total_closed_count": total_closed_count,
         "closed_capsules": closed_capsules,
-    }}
+        }}

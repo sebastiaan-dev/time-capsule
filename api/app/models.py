@@ -2,7 +2,6 @@ from .database import Base
 from sqlalchemy import Column, Integer, Text, TIMESTAMP
 from .config import settings
 
-
 class Capsule(Base):
     __tablename__ = settings.TABLE_NAME
 
