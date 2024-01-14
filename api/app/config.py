@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     DB_USERNAME: str = "postgres"
     DB_PASSWD: str = "s3cr3tp4ssw0rd"
     DB_NAME: str = "timecapsule_prod"
-    DB_HOST: str = "145.109.34.188"
+    DB_HOST: str = "postgres-db-container" # hostname resolution works because of Docker network.
     DB_PORT: int = 5432
     TABLE_NAME: str = "timecapsules"
 
