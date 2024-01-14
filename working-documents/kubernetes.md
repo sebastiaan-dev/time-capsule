@@ -1,0 +1,4 @@
+- microk8s installation: https://microk8s.io/docs/install-macos
+- certmanager: https://microk8s.io/docs/addon-cert-manager
+- local docker image to microk8s: https://microk8s.io/docs/registry-images and https://stackoverflow.com/a/69353753
+- deployment: https://medium.com/@malachibazar/hosting-a-web-server-in-microk8s-399573e705cc
