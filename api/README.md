@@ -1,8 +1,8 @@
 # API 
 
 ## TODOs
-- [ ] API should not allow new timecapsules to be POSTed with time in the past.
-- [ ] Future timecapsule titles should not be displayed.
+- [x] API should not allow new timecapsules to be POSTed with time in the past.
+- [x] Future timecapsule titles should not be displayed.
 
 ## Configuration
 If we switch from Docker network to some other solution, it is important to change `config.py` accordingly. 
