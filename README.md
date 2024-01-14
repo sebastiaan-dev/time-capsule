@@ -3,14 +3,18 @@
 ## Todo
 - [ ] frontend
 - [ ] api
-- [ ] database
+- [x] database
 - [ ] uml diagram
-- [ ] dockerfiles
+- [x] dockerfile db
+- [x] dockerfile api
+- [ ] dockerfile frontend
   
 - [ ] kubernetes yaml schemas
 - [ ] microk8s deployment
 - [ ] certificate management
 - [ ] TLS
+
+- [ ] RBAC: https://microk8s.io/docs/multi-user
 
 ## Frontend
 - Create a time capsule
