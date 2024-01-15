@@ -78,7 +78,6 @@ async def get_capsule(start: int = 0, limit: int = 100, db: Session = Depends(ge
     return {"code": success.code, "message": success.message, "data": {
         "opened_capsules": opened_capsules,
         "opened_count": total_opened_count,
-        # TODO
         "closed_capsule": closed_capsule,
         "closed_count": total_closed_count,
         }}
