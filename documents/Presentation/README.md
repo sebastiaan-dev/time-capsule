@@ -1,5 +1,9 @@
 # Presentation materials
 
+- Diagram assessment
+    - Asked on 15/01/2024 during class if these diagrams are what is expected or if changes are desired.
+    - Professor said that this is good, however, when we are doing the kubernetes deployment that would also need to be included; this includes load balancer/ingress, cluster IP, pod targetports, etc.
+
 ## Diagrams
 
 #### Sequence Diagram: User-agent GETs Timecapsules
