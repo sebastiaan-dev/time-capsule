@@ -1,4 +1,5 @@
 from fastapi import Depends, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from app import crud, models, schemas
 from app.database import SessionLocal, engine
@@ -11,6 +12,19 @@ app = FastAPI(
         title=settings.PROJECT_NAME,
         openapi_url=f"{settings.API_V1_STR}/openapi.json"
         )
+
+origins = [
+    "http://localhost"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    # TODO: restrict
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def get_db():
     db = SessionLocal()
@@ -39,12 +53,15 @@ async def create_capsule(item: schemas.CapsuleCreate, db: Session = Depends(get_
 async def get_capsule(start: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     capsules = crud.get_capsule(db, start, limit)
     if capsules is None:
-        return {"code": server_error.code, "message": server_error.message, "data": None}
+        return {"code": server_error.code, "message": server_error.message, "data": []}
     opened_capsules = []
     closed_capsules = []
 
     for capsule in capsules:
         if capsule.date < datetime.now():
+            # TODO: implement
+            capsule.createdAt = datetime.now()
+            capsule.openedAt = datetime.now()
             opened_capsules.append(capsule)
         else:
             capsule.title = None
@@ -52,12 +69,16 @@ async def get_capsule(start: int = 0, limit: int = 100, db: Session = Depends(ge
             closed_capsules.append(capsule)
 
     opened_capsules.sort(key=lambda k: k.date, reverse=True)
-    closed_capsules.sort(key=lambda k: k.date, reverse=True)
+    closed_capsules.sort(key=lambda k: k.date, reverse=False)
     total_opened_count, total_closed_count = crud.get_capsule_count(db)
+    closed_capsule = {
+        "next_time": closed_capsules[0].date,
+    }
 
     return {"code": success.code, "message": success.message, "data": {
         "opened_capsules": opened_capsules,
         "opened_count": total_opened_count,
-        "closed_capsules": closed_capsules,
+        # TODO
+        "closed_capsule": closed_capsule,
         "closed_count": total_closed_count,
         }}

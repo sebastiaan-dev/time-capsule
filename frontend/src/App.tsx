@@ -6,6 +6,7 @@ import { getCapsules } from "./services";
 import { ClosedCapsule } from "./components/closed-capsule";
 import { Paginate } from "./components/paginate";
 import { Button } from "./components/ui/button";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
   const [capsules, setCapsules] = useState<Capsule[]>([]);
@@ -48,10 +49,11 @@ function App() {
           <ClosedCapsule {...closedCapsule} count={closedCount} />
         )}
         {capsules.map((capsule) => (
-          <OpenedCapsule {...capsule} />
+          <OpenedCapsule key={capsule.title} {...capsule} />
         ))}
         <Paginate {...{ setStart, setLimit }} />
       </div>
+      <Toaster />
     </div>
   );
 }

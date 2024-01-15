@@ -1,8 +1,7 @@
 # Seperate image for building the application
 FROM node:20.9-slim as build
 
-ARG VITE_API_UI_TEST_BASE_URL
-ARG VITE_API_BACKEND_BASE_URL
+ARG VITE_API_BASE_URL
 
 WORKDIR /app
 # Enable corepack for version manager

@@ -2,13 +2,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ChangeEvent, useState } from "react";
 import { Input } from "./ui/input";
-import { Calendar } from "./ui/calendar";
 import { createCapsule } from "@/services";
+import { useToast } from "./ui/use-toast";
+import { DatePicker } from "./date-picker";
 
 export const CapsuleForm = () => {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const { toast } = useToast();
 
   const handleTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -18,12 +20,17 @@ export const CapsuleForm = () => {
     setMessage(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!date) {
       return;
     }
 
-    createCapsule({ title, message, date });
+    const succeeded = await createCapsule(toast, { title, message, date });
+    if (succeeded) {
+      setTitle("");
+      setMessage("");
+      setDate(new Date());
+    }
   };
 
   return (
@@ -32,8 +39,12 @@ export const CapsuleForm = () => {
         Send a message to the future.
       </h1>
       <Input placeholder="Title" value={title} onChange={handleTitle} />
-      <Textarea value={message} onChange={handleText} />
-      <Calendar mode="single" selected={date} onSelect={setDate} />
+      <Textarea
+        placeholder="Your story..."
+        value={message}
+        onChange={handleText}
+      />
+      <DatePicker date={date} setDate={setDate} />
       <div className="flex justify-end w-full">
         <Button onClick={handleSubmit}>Send</Button>
       </div>

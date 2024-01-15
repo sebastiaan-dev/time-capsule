@@ -7,10 +7,10 @@ export type CreateCapsuleDto = {
 export type Capsule = {
   title: string;
   message: string;
-  openedAt: Date;
-  createdAt: Date;
+  openedAt: string;
+  createdAt: string;
 };
 
 export type CapsuleClosed = {
-  nextTime: Date;
+  next_time: string;
 };

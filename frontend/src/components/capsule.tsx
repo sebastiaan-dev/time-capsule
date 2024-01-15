@@ -9,8 +9,8 @@ import {
 interface OpenedCapsuleProps {
   title: string;
   message: string;
-  createdAt: Date;
-  openedAt: Date;
+  createdAt: string;
+  openedAt: string;
 }
 
 export const OpenedCapsule = ({
@@ -26,10 +26,10 @@ export const OpenedCapsule = ({
           <CardTitle>{title}</CardTitle>
           <div className="flex justify-between">
             <CardDescription>
-              Created on {createdAt.toISOString()}
+              Created on {new Date(createdAt).toISOString()}
             </CardDescription>
             <CardDescription>
-              Opened on {openedAt.toISOString()}
+              Opened on {new Date(openedAt).toISOString()}
             </CardDescription>
           </div>
         </div>
