@@ -1,22 +1,13 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import Countdown, { CountdownRendererFn } from "react-countdown";
 import { Badge } from "@/components/ui/badge";
 
 interface ClosedCapsuleProps {
-  next_time: Date;
-  total_count: number;
+  nextTime: Date;
+  count: number | null;
 }
 
-export const ClosedCapsule = ({
-  next_time,
-  total_count,
-}: ClosedCapsuleProps) => {
+export const ClosedCapsule = ({ nextTime }: ClosedCapsuleProps) => {
   const renderer: CountdownRendererFn = ({
     days,
     hours,
@@ -47,7 +38,7 @@ export const ClosedCapsule = ({
         </CardHeader>
         <CardContent>
           <div className="flex justify-center text-xl font-semibold pb-10 pt-10">
-            <Countdown date={next_time} renderer={renderer} />
+            <Countdown date={nextTime} renderer={renderer} />
           </div>
         </CardContent>
       </Card>

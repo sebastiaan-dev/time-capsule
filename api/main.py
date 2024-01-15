@@ -35,7 +35,7 @@ async def create_capsule(item: schemas.CapsuleCreate, db: Session = Depends(get_
         return {"code": success.code, "message": success.message, "data": result}
 
 
-@app.get("/timecapsule")
+@app.get("/timecapsules")
 async def get_capsule(start: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     capsules = crud.get_capsule(db, start, limit)
     if capsules is None:
@@ -56,8 +56,8 @@ async def get_capsule(start: int = 0, limit: int = 100, db: Session = Depends(ge
     total_opened_count, total_closed_count = crud.get_capsule_count(db)
 
     return {"code": success.code, "message": success.message, "data": {
-        "total_opened_count": total_opened_count,
         "opened_capsules": opened_capsules,
-        "total_closed_count": total_closed_count,
+        "opened_count": total_opened_count,
         "closed_capsules": closed_capsules,
+        "closed_count": total_closed_count,
         }}

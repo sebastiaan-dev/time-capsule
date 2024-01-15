@@ -8,12 +8,26 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-export const Paginate = () => {
+interface PaginateProps {
+  setStart: React.Dispatch<React.SetStateAction<number>>;
+  setLimit: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export const Paginate = ({ setStart }: PaginateProps) => {
+  const handlePrevious = () => {
+    setStart((prev) => (prev > 0 ? prev - 1 : 0));
+  };
+
+  // TODO: we need a limit
+  const handleNext = () => {
+    setStart((prev) => prev + 1);
+  };
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious onClick={handlePrevious} />
         </PaginationItem>
         <PaginationItem>
           <PaginationLink href="#">1</PaginationLink>
@@ -22,7 +36,7 @@ export const Paginate = () => {
           <PaginationEllipsis />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext onClick={handleNext} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
