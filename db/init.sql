@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS timecapsules (
     id serial PRIMARY KEY,
     title text NOT NULL,
     message text NOT NULL,
-    date timestamp
+    date timestamp,
+    created_at timestamp
 );
 
 -- Insert two example rows of data
