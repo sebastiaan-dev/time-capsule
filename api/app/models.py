@@ -9,3 +9,5 @@ class Capsule(Base):
     title = Column(Text, nullable=False)
     message = Column(Text, nullable=False)
     date = Column(TIMESTAMP, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=True)
+

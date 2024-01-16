@@ -5,6 +5,7 @@ from datetime import datetime
 
 def create_capsule(db: Session, title, message, date):
     db_capsule = models.Capsule(title=title, message=message, date=date)
+    db_capsule.created_at = datetime.now()
     db.add(db_capsule)
     db.commit()
     db.refresh(db_capsule)
