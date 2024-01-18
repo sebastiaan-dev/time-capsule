@@ -26,10 +26,18 @@ export const OpenedCapsule = ({
           <CardTitle>{title}</CardTitle>
           <div className="flex justify-between">
             <CardDescription>
-              Created on {new Date(createdAt).toISOString()}
+              Created on{" "}
+              {new Date(createdAt).toLocaleString("en-US", {
+                dateStyle: "long",
+                timeZone: "UTC",
+              })}
             </CardDescription>
             <CardDescription>
-              Opened on {new Date(openedAt).toISOString()}
+              Opened on{" "}
+              {new Date(openedAt).toLocaleString("en-US", {
+                dateStyle: "long",
+                timeZone: "UTC",
+              })}
             </CardDescription>
           </div>
         </div>

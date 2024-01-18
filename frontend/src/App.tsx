@@ -14,17 +14,19 @@ function App() {
     null
   );
   const [closedCount, setClosedCount] = useState<number | null>(null);
+  const [next, setNext] = useState<boolean>(false);
   const [start, setStart] = useState(0);
   const [limit, setLimit] = useState(100);
 
   useEffect(() => {
     const updateCapsules = async () => {
-      const { opened_capsules, closed_capsule, closed_count } =
+      const { opened_capsules, closed_capsule, closed_count, next_flag } =
         await getCapsules(start, limit);
 
       setCapsules(opened_capsules);
       setClosedCapsule(closed_capsule);
       setClosedCount(closed_count);
+      setNext(next_flag);
     };
 
     updateCapsules();
@@ -51,7 +53,9 @@ function App() {
         {capsules.map((capsule) => (
           <OpenedCapsule key={capsule.title} {...capsule} />
         ))}
-        <Paginate {...{ setStart, setLimit }} />
+        <Paginate
+          {...{ setStart, setLimit, hasPrevious: start > 0, hasNext: next }}
+        />
       </div>
       <Toaster />
     </div>

@@ -1,9 +1,7 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
@@ -11,9 +9,11 @@ import {
 interface PaginateProps {
   setStart: React.Dispatch<React.SetStateAction<number>>;
   setLimit: React.Dispatch<React.SetStateAction<number>>;
+  hasPrevious: boolean;
+  hasNext: boolean;
 }
 
-export const Paginate = ({ setStart }: PaginateProps) => {
+export const Paginate = ({ setStart, hasPrevious, hasNext }: PaginateProps) => {
   const handlePrevious = () => {
     setStart((prev) => (prev > 0 ? prev - 1 : 0));
   };
@@ -27,16 +27,16 @@ export const Paginate = ({ setStart }: PaginateProps) => {
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious onClick={handlePrevious} />
+          <PaginationPrevious
+            onClick={handlePrevious}
+            style={{ visibility: hasPrevious ? "visible" : "hidden" }}
+          />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext onClick={handleNext} />
+          <PaginationNext
+            onClick={handleNext}
+            style={{ visibility: hasNext ? "visible" : "hidden" }}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

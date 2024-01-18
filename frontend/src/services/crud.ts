@@ -31,6 +31,7 @@ export const getCapsules = async (start: number, limit: number) => {
       opened_count: number;
       closed_capsule: CapsuleClosed;
       closed_count: number;
+      next_flag: boolean;
     };
   }>("/timecapsules", { params: { start, limit } });
 
