@@ -43,7 +43,7 @@ function App() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-5 items-center pb-10">
+      <div className="flex flex-col min-h-screen gap-5 items-center pb-10">
         <h2 className="text-3xl font-semibold pb-10 pt-10" id="listview">
           A brief history
         </h2>
