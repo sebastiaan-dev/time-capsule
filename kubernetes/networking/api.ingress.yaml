@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - api.time-capsule.sebastiaan.tech
-    secretName: tls-secret
+    secretName: api-tls-secret
   rules:
   - host: api.time-capsule.sebastiaan.tech
     http:

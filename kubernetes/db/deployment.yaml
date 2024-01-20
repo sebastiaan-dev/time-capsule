@@ -12,6 +12,7 @@ spec:
     metadata:
       labels:
         app: db
+        policy: db
     spec:
       containers:
       - name: db
