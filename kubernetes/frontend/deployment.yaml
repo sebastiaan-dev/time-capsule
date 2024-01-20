@@ -17,5 +17,11 @@ spec:
       - name: frontend
         image: segerritsen/time-capsule-frontend:1.0
         imagePullPolicy: Always
+        env:
+        - name: API_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: api-base-url
         ports:
         - containerPort: 80

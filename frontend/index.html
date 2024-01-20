@@ -7,6 +7,9 @@
     <title>Vite + React + TS</title>
   </head>
   <body>
+    <script>
+      globalThis.import_meta_env = JSON.parse('"import_meta_env_placeholder"');
+    </script>
     <div id="root" style="height: 100%;"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

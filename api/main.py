@@ -32,6 +32,7 @@ def get_db():
         yield db
     finally:
         db.close()
+    
 
 @app.post("/timecapsule")
 async def create_capsule(item: schemas.CapsuleCreate, db: Session = Depends(get_db)):
