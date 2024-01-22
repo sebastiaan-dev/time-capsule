@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: monitor-binding
+  namespace: time-capsule
+roleRef:
+  kind: Role
+  name: monitor
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  – kind: User
+  name: example 
+  apiGroup: rbac.authorization.k8s.io
