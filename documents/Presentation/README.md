@@ -1,4 +1,4 @@
 # Presentation materials
 
-- [Diagrams](Diagrams.md)
+- [Diagrams](Diagram.md)
 - 
