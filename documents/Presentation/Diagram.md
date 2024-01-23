@@ -1,4 +1,4 @@
-# Presentation materials
+# Diagrams
 
 - Diagram assessment
     - Asked on 15/01/2024 during class if these diagrams are what is expected or if changes are desired.
