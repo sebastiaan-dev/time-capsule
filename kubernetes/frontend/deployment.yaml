@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: segerritsen/time-capsule-frontend:1.0
+        image: europe-west4-docker.pkg.dev/time-capsule-412314/time-capsule/frontend:1.0
         imagePullPolicy: Always
         resources:
           requests:
