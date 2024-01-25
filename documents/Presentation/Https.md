@@ -28,7 +28,7 @@ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.13.3 \
+  --version v1.13.3 
 ```
 
 In GCP on an Autopilot, installing the helm chart failed at first with the error _"Error: INSTALLATION FAILED: failed post-install: timed out waiting for the condition"_. 
