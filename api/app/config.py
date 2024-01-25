@@ -1,3 +1,4 @@
+import os
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
@@ -6,11 +7,10 @@ class Settings(BaseSettings):
     MIN_TITLE_LEN: int = 5
     MIN_MESSAGE_LEN: int = 5
     MAX_EXPIRE_DAY: int = 3650
-    DB_USERNAME: str = "postgres"
-    DB_PASSWD: str = "s3cr3tp4ssw0rd"
-    DB_NAME: str = "timecapsule_prod"
-    DB_HOST: str = "db" # hostname resolution works because of Docker network.
-    DB_PORT: int = 5432
-    TABLE_NAME: str = "timecapsules"
+    DB_USERNAME: str = os.getenv("DB_USERNAME")
+    DB_PASSWD: str = os.getenv("DB_PASSWD")
+    DB_NAME: str = os.getenv("DB_NAME")
+    DB_HOST: str = os.getenv("DB_HOST")
+    DB_PORT: int = int(os.getenv("DB_PORT"))
 
 settings = Settings()

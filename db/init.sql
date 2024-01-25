@@ -9,7 +9,7 @@ END $$;
 \c timecapsule_prod;
 
 -- Create the "timecapsules" table if it doesn't exist
-CREATE TABLE IF NOT EXISTS timecapsules (
+CREATE TABLE IF NOT EXISTS capsules (
     id serial PRIMARY KEY,
     title text NOT NULL,
     message text NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS timecapsules (
 );
 
 -- Insert two example rows of data
-INSERT INTO timecapsules (title, message, date) VALUES
+INSERT INTO capsules (title, message, date) VALUES
     ('Birthday Capsule', 'Happy Birthday!', '2024-01-14 12:00:00'),
     ('Lecture Capsule', 'Third lecture of Software Containerization!',
         '2024-01-15 15:30:00');

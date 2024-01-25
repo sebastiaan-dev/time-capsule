@@ -1,0 +1,7 @@
+apiVersion: v1 
+kind: ConfigMap 
+metadata:
+  name: frontend-config
+  namespace: time-capsule
+data:
+  api-base-url: https://api.time-capsule.sebastiaan.tech
