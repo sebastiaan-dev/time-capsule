@@ -14,6 +14,9 @@
 
 In this section, we describe all commands executed.
 
+### Install ingress
+`helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace`
+
 ### Install cert-manager
 We installed cert manager by running the following commands:
 
