@@ -1,10 +1,11 @@
-# RBAC
+# 🚧 RBAC
 
 ## Assessment
 - [x] Configure ServiceAccounts/Users.
 - [x] Create Roles with relevant permissions.
 - [x] Create RoleBindings to associate the Users/ServiceAccounts with the Roles.
 - [x] In the presentation, demonstrate what Users/ServiceAccounts can and cannot do.
+- [ ] Configure Role Based Access Control for the application. (2 points for each correct and useful role, with a maximum of 3 roles)
 
 ## Information
 
