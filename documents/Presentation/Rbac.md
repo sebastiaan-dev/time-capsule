@@ -155,3 +155,7 @@ no
 ```
 
 Great, it works. Now Cindy can manage the config and secrets within our applications namespace, but she cannot create new deployments for example.
+
+---
+
+<img width="945" alt="image displaying that this RBAC config behaves as expected" src="https://github.com/sebastiaan-dev/time-capsule/assets/84989429/c8fbf1e3-a282-44b8-b5c6-0c0289ca5ba8">
