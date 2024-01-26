@@ -5,6 +5,8 @@ metadata:
   namespace: time-capsule
 spec:
   replicas: 2
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: api
