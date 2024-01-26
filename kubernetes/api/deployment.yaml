@@ -53,3 +53,8 @@ spec:
               key: db-password
         ports:
         - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            port: 5000
+            path: /docs
