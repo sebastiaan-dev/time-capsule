@@ -28,7 +28,7 @@
 
 ## Information
 
-In this section, we describe the decisions we have made and why. 
+In this section, we describe the decisions we have made and why. Note that the [Diagrams](Diagram.md) section contains additional (visual) information on the workings of the frontend, API and DB.
 
 ### 🚧 API
 TODO
