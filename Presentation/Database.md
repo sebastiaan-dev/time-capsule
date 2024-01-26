@@ -1,6 +1,4 @@
-# 🚧 Database
-
-This is not finished yet.
+# Database
 
 ## Assessment
 - [x] Choose the database that you want to work with.
@@ -27,14 +25,63 @@ _"The Cloud Native Computing Foundation seeks to drive adoption of this paradigm
 
 ### Official Image 
 
-Using an official image:
-```bash
-helm install db-new oci://registry-1.docker.io/bitnamicharts/postgresql --namespace time-capsule -f values.yaml
+At first we used the Bitnami Charts for Postgres, but we concluded by using the official postgres:16 container image.
+
+### Create Kubernetes resources
+We created a StatefulSet and used the official container image. We then added the relevant Secret and configMap kv pairs in the env variables (further elaborated upon below).
+
+```yaml
+        <snippet>
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: db-username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: db-password
+        </snippet>
 ```
 
-### 🚧 Create Kubernetes resources
-This creates a StatefulSet and PVC on an externally provisioned volume. We might still want to check if this is working as intended. 
-We still have to make this compatible with Secrets and ConfigMaps. 
+We created a PVC:
+
+_pvc.yaml_
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: time-capsule
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+```
+
+Then we used this PVC claim, mount it to `/var/lib/postgresql/data` and pass the env variable PGDATA to communicate that the data should be stored on the mounted path. 
+
+```yaml
+        <snippet>
+        env:
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        ports:
+        volumeMounts:
+          - name: postgres-db
+            mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-db
+        persistentVolumeClaim:
+          claimName: postgres-pvc
+        </snippet>
+```
+
+Finally, we used a ClusterIP service to reach our database pods via this (cluster) IP address.
 
 ### Initialize the Database
 The database tables (part of schema) are automatically created by FastAPI in _main.py_: `models.Base.metadata.create_all(bind=engine)`.
