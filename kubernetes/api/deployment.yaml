@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: segerritsen/time-capsule-api:1.0
+        image: europe-west4-docker.pkg.dev/time-capsule-412314/time-capsule/api:1.0
         imagePullPolicy: Always
         resources:
           requests:
