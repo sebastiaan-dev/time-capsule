@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: canary-frontend
+  namespace: time-capsule
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-canary
+  template:
+    metadata:
+      labels:
+        app: frontend-canary
+        policy: frontend-canary
+    spec:
+      containers:
+      - name: frontend-canary
+        image: europe-west4-docker.pkg.dev/time-capsule-412314/time-capsule/frontend:2
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: API_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: api-base-url
+        ports:
+        - containerPort: 80
