@@ -5,7 +5,7 @@
 - [x] Create Roles with relevant permissions.
 - [x] Create RoleBindings to associate the Users/ServiceAccounts with the Roles.
 - [x] In the presentation, demonstrate what Users/ServiceAccounts can and cannot do.
-- [ ] Configure Role Based Access Control for the application. (2 points for each correct and useful role, with a maximum of 3 roles)
+- [x] Configure 3 correct and useful RBAC roles for the application. 
 
 ## Information
 
@@ -157,6 +157,17 @@ no
 
 Great, it works. Now Cindy can manage the config and secrets within our applications namespace, but she cannot create new deployments for example.
 
----
+### Screenshot
 
 <img width="945" alt="image displaying that this RBAC config behaves as expected" src="https://github.com/sebastiaan-dev/time-capsule/assets/84989429/c8fbf1e3-a282-44b8-b5c6-0c0289ca5ba8">
+
+### Configure 3 correct and useful RBAC roles for the application. 
+
+We have experimented with multiple roles and choose to demonstrate the following three roles:
+
+1. **time-capsule-secret-manager**
+   - This role is explained in detail above.
+2. **time-capsule-namespace-admin**
+   - This role can do everything in the `time-capsule` namespace.
+3. **time-capsule-storage-admin**
+   - This role enables administrators to manage storage resources in the `time-capsule` namespace by granting read and write permissions on persistent volumes, claims, and storage classes.
