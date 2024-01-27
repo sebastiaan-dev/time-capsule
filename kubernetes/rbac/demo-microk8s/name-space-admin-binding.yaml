@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: time-capsule-namespace-admin
+  namespace: time-capsule
+subjects:
+- kind: User
+  name: sebastiaan
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: time-capsule-namespace-admin
+  apiGroup: rbac.authorization.k8s.io
