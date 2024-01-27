@@ -1,4 +1,4 @@
-# 🚧 RBAC
+# RBAC
 
 ## Assessment
 - [x] Configure ServiceAccounts/Users.
