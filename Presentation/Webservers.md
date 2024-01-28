@@ -100,7 +100,7 @@ To scale the replicas up or down, use the `scale` command:
 
 
 ### 1.4 Create Kubernetes Service/Ingress
-To minimize the use of ports and loadbalancers for each server, we utilize ingress with an nginx proxy to access services instead of using on ClusterIP or LoadBalancer.
+To minimize the use of ports and loadbalancers for each services, we utilize ingress with an nginx proxy to access services instead of using on ClusterIP or LoadBalancer.
 ```yaml
    matchLabels:
       app: api
