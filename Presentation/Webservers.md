@@ -32,7 +32,7 @@ In this section, we describe the decisions we have made and why. Note that the [
 
 ### 🚧 API
 #### 1.1 Create REST API
-We use FastAPI to build our REST API, which consists of two APIs. The first one is GET /timecapsule, which returns all information about the capsule we have created in the following format:
+We use FastAPI to build our REST API, which consists of two API endpoints. The first one is GET `/timecapsule`, which returns all information about the capsule we have created in the following format:
 ``` python
 {
   "code": success.code,
@@ -47,10 +47,9 @@ We use FastAPI to build our REST API, which consists of two APIs. The first one 
 }
 ```
 
-The second one is POST /timecapsule, which generates a new capsule using user parameters such as title, message, and open date. The API server validates each parameter's validity. For title and message fields, they can be either too short or too long. As for the date field, it cannot be earlier than the current time.
+The second one is POST `/timecapsule`, which generates a new capsule using user parameters such as title, message, and open date. The API server validates each parameter's validity. For title and message fields, they can be either too short or too long. As for the date field, it cannot be earlier than the current time.
 
-
-We have implemented other `error_code` and `error_message` to make HTTP status more detail helping frontend to understand what is happening in the backend.
+We implement `error_code` and `error_message` in our HTTP responses to convey clear feedback from the API to the frontend.
 ```python
 success = Response(1000, "Success")
 
@@ -94,33 +93,40 @@ To scale the replicas up or down, use the `scale` command:
 
 ![Scaling](includes/api-scale.png)
 
-
-
-
-
-
 ### 1.4 Create Kubernetes Service/Ingress
-To minimize the use of ports and loadbalancers for each services, we utilize ingress with an nginx proxy to access services instead of using on ClusterIP or LoadBalancer.
+We used a ClusterIP (default) service:
+
 ```yaml
-   matchLabels:
-      app: api
-  policyTypes:
-    - Ingress
-    - Egress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: ingress-nginx
-      ports:
-        - protocol: TCP
-          port: 5000
+<snippet>
+spec:
+  selector:
+    app: api
+  ports:
+   - port: 5000
+     targetPort: 5000
+</snippet>
 ```
+
+Furthermore, we leverage nginx-ingress to direct requests matching the specified HTTP Host to our API ClusterIP service:
+
+```yaml
+      <snippet>
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api
+            port:
+              number: 5000
+      </snippet>
+```
+
 ### 1.5 Test API Access
 The default setting is ClusterIP which allows us to  `curl` the API within the cluster:
+
 ![test-inside](includes/api-test-inside.png)
 
-To test API access from outside, change the type to NodePort and add a nodePort:
+To test API access from the outside, we could for example change the type to `NodePort` and add a `nodePort`:
 ```yaml
   type: NodePort
   ports:
@@ -128,6 +134,11 @@ To test API access from outside, change the type to NodePort and add a nodePort:
      nodePort: 30002
      targetPort: 5000
 ```
-![test-outside](includes/api-test-outside.png)
+
+After exposing our service via an Ingress load balancer, we confirm that the API is also accessible from the internet:
+
+![curl-internet](includes/curl-internet.png)
+
+
 ### 🚧 Web UI
 TODO
