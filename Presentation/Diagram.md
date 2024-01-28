@@ -65,6 +65,8 @@ Note that we TLS is terminated at ingress, by doing so we achieve SSL/TLS offloa
 
 In the future, depending on the security requirements, we could explore adding a WAF to filter on the decrypted traffic and potentially perform TLS re-encryption for the traffic between the load balancer and the backend pods; potentially mTLS. This is computationally more desirable because we could maintain a more persistent connection on the backend side.
 
+Also note that the kubelet is now visualised at pod-level, though this in practice it's a node-level agent. However, since the kubelet manages that the containers described in the PodSpec are running and healthy (as desired), a connection from a pod via the kubelet to the API servers is visualised in this manner.
+
 ### Sequence Diagrams
 #### User-agent GETs Timecapsules
 ```mermaid
