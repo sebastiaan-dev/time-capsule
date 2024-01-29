@@ -21,7 +21,9 @@
 	- [ ] image Registry - 1 point
 	- [ ] certificates - 1 point
 	- [ ] network policies - 1 point
+		- Need to show with timeouts on blocked requests and succesful curl/wgets on allowed requests (info from Max).
   - [ ] * **Serge:** roles - 1 point
+  	- Need to show with can-i. 
 
 **Hanjun:**
 - [ ] Container build and first deployment, scaling, uninstallation (Max 4 minutes).
