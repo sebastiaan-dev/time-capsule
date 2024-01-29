@@ -7,8 +7,8 @@
 #### Kubernetes Cluster diagram
 ```mermaid
 graph LR;
- client([client])-. Ingress .->ingress[Ingress];
- ingress-->|HTTP Request|routingRule{Rules};
+ client([client])-. HTTP Request .->ingress[NGINX Ingress];
+ ingress-. HTTP Request .-> routingRule{Rules};
  subgraph Cluster
   routingRule;
   ingress;
