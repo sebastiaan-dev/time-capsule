@@ -33,6 +33,6 @@ For a more in-depth understanding of Time Capsule, refer to our supplementary do
 ## Screenshot:
 
 <p align="center">
-  <img src="./Presentation/timecapsule.png">
+  <img src="./Presentation/includes/timecapsule.png">
 </p>
 
