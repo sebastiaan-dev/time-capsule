@@ -112,7 +112,7 @@ microk8s stop && microk8s start
 
 We now define the role and role binding:
 
-_config-secret-manager-role.yaml_
+_secret-manager-role.yaml_
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -125,7 +125,7 @@ rules:
   verbs: ["*"]
 ```
 
-_config-secret-manager-binding.yaml_
+_secret-manager-binding.yaml_
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -155,7 +155,7 @@ $ microk8s kubectl auth can-i get secret --namespace time-capsule --as serge
 no
 ```
 
-Great, it works. Now Cindy can manage the config and secrets within our applications namespace, but she cannot create new deployments for example.
+Great, it works. Now Cindy can manage the secrets within our applications namespace, but she cannot create new deployments for example.
 
 ### Screenshot
 
