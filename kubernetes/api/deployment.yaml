@@ -5,6 +5,8 @@ metadata:
   namespace: time-capsule
 spec:
   replicas: 2
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: api
@@ -53,3 +55,8 @@ spec:
               key: db-password
         ports:
         - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            port: 5000
+            path: /docs

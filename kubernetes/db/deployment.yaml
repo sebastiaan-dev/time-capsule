@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: db
   namespace: time-capsule
@@ -34,5 +34,13 @@ spec:
             configMapKeyRef:
               name: db-config
               key: db-name
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
         ports:
-        - containerPort: 5432
+        volumeMounts:
+          - name: postgres-db
+            mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-db
+        persistentVolumeClaim:
+          claimName: postgres-pvc

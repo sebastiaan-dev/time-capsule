@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: canary-ingress-frontend
+  namespace: time-capsule
+  annotations:
+    cert-manager.io/issuer: "time-capsule-ca-issuer"
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "50"
+spec:
+  tls:
+  - hosts:
+    - time-capsule.sebastiaan.tech
+    secretName: frontend-tls-secret
+  rules:
+  - host: time-capsule.sebastiaan.tech
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: canary-frontend
+            port:
+              number: 80
+  ingressClassName: nginx

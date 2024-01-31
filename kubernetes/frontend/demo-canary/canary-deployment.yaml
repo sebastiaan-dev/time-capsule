@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: canary-frontend
   namespace: time-capsule
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: frontend-canary
   template:
     metadata:
       labels:
-        app: frontend
-        policy: frontend
+        app: frontend-canary
+        policy: frontend-canary
     spec:
       containers:
-      - name: frontend
-        image: europe-west4-docker.pkg.dev/time-capsule-412314/time-capsule/frontend:1.0
+      - name: frontend-canary
+        image: europe-west4-docker.pkg.dev/time-capsule-412314/time-capsule/frontend:2
         imagePullPolicy: Always
         resources:
           requests:

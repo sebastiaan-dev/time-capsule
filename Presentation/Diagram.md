@@ -1,53 +1,14 @@
 # Diagrams
 
-- Diagram assessment
-    - Asked on 15/01/2024 during class if these diagrams are what is expected or if changes are desired.
-    - Professor said that this is good, however, when we are doing the kubernetes deployment that would also need to be included; this includes load balancer/ingress, cluster IP, pod targetports, etc.
-    - Asked on 23/01/2024 during class if K8 deployment was missing anything and answer was that it wasn't.
-
 ## Diagrams
+
+### Kubernetes
 
 #### Kubernetes Cluster diagram
 ```mermaid
 graph LR;
- client([client])-. Ingress .->ingress[Ingress];
- ingress-->|HTTP Request|routingRule{Rules};
- subgraph Cluster
-  routingRule;
-  ingress;
-  routingRule-->|route|service1[Frontend Service: ClusterIP];
-  routingRule-->|route|service2[API Service: ClusterIP];
-   subgraph Frontend Deployment
-     style service1 fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
-     service1-->pod1[Pod];
-     service1-->pod2[Pod];
-    end
-    subgraph API Deployment
-     service2-->pod3[Pod];
-     service2-->pod4[Pod];
-    end
-    pod3-->dbService[DB Service: ClusterIP];
-    pod4-->dbService[DB Service: ClusterIP];
-    subgraph DB Deployment
-      pod5;
-      dbService;
-      dbService-->pod5[Pod];
-    end
- end
- 
-classDef plain fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
-classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
-classDef cluster fill:#fff,stroke:#bbb,stroke-width:2px,color:#326ce5;
-class ingress,routingRule,service1,service2,pod1,pod2,pod3,pod4,pod5,dbService,dbPod, k8s;
-class client plain;
-class cluster cluster;
-```
-
-#### Kubernetes Cluster diagram 2
-```mermaid
-graph LR;
- client([client])-. Ingress .->ingress[Ingress];
- ingress-->|HTTP Request|routingRule{Rules};
+ client([client])-. HTTP Request .->ingress[NGINX Ingress];
+ ingress-. HTTP Request .-> routingRule{Rules};
  subgraph Cluster
   routingRule;
   ingress;
@@ -100,7 +61,14 @@ class client plain;
 class cluster cluster;
 ```
 
-#### Sequence Diagram: User-agent GETs Timecapsules
+Note that we TLS is terminated at ingress, by doing so we achieve SSL/TLS offloading to alleviate workload on the cluster internal nodes.
+
+In the future, depending on the security requirements, we could explore adding a WAF to filter on the decrypted traffic and potentially perform TLS re-encryption for the traffic between the load balancer and the backend pods; potentially mTLS. This is computationally more desirable because we could maintain a more persistent connection on the backend side.
+
+Also note that the kubelet is now visualised at pod-level, though this in practice it's a node-level agent. However, since the kubelet manages that the containers described in the PodSpec are running and healthy (as desired), a connection from a pod via the kubelet to the API servers is visualised in this manner.
+
+### Sequence Diagrams
+#### User-agent GETs Timecapsules
 ```mermaid
 sequenceDiagram
     participant User-agent
@@ -119,7 +87,7 @@ sequenceDiagram
     REST API-->>User-agent: HTTP Response (API)
 ```
 
-#### Sequence Diagram: User-agent POSTs Timecapsule
+#### User-agent POSTs Timecapsule
 ```mermaid
 sequenceDiagram
     participant User-agent
@@ -139,5 +107,11 @@ sequenceDiagram
 ```
 
 #### UML Class Diagram
-![Time-capsule - UML API diagram](./Time-capsule%20-%20UML%20API%20diagram.png)
+![Time-capsule - UML API diagram](./includes/Time-capsule%20-%20UML%20API%20diagram.png)
 - Edit the [Lucidchart here](https://lucid.app/lucidchart/2603a3fc-15f5-4298-adff-3e06fd22bff7/edit?viewport_loc=-846%2C-217%2C3555%2C1837%2C0_0&invitationId=inv_a698e5e1-5cb3-4e22-9ab1-65e1367876ef).
+
+---
+
+## Assessment 
+On 15/01/2024, I asked for feedback on the diagrams. The professor mentioned they were good. However, they suggested including Kubernetes deployment details like load balancer/ingress, cluster IP, pod target ports.
+On 23/01/2024, I confirmed if the Kubernetes deployment was now complete, and the professor affirmed that it was.
