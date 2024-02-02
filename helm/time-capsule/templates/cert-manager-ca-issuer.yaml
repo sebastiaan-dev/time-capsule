@@ -1,0 +1,8 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: time-capsule-ca-issuer
+  namespace: time-capsule
+spec:
+  ca:
+    secretName: time-capsule-ca-secret
