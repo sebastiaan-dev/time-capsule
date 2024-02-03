@@ -5,8 +5,7 @@ metadata:
   name: dns-policy
   namespace: time-capsule
 spec:
-  podSelector:
-    matchLabels: {}
+  podSelector: {}
   policyTypes:
     - Egress
   egress:
@@ -19,4 +18,6 @@ spec:
             k8s-app: kube-dns
       ports:
         - protocol: UDP
+          port: 53
+        - protocol: TCP
           port: 53
