@@ -1,0 +1,3 @@
+API_IMAGE_SOURCE: europe-west4-docker.pkg.dev/time-capsule-412314/time-capsule/api:1.0
+FRONTEND_IMAGE_SOURCE: europe-west4-docker.pkg.dev/time-capsule-412314/time-capsule/frontend:1.0
+DB_IMAGE_SOURCE: postgres:16

@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: time-capsule-ca
+  namespace: time-capsule
+spec:
+  isCA: true
+  commonName: time-capsule-ca
+  subject:
+    organizations:
+      - Time Capsule
+  secretName: time-capsule-ca-secret
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
+    group: cert-manager.io

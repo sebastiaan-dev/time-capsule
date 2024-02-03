@@ -30,6 +30,7 @@ At first we used the Bitnami Charts for Postgres, but we concluded by using the 
 ### Create Kubernetes resources
 We created a StatefulSet and used the official container image. We then added the relevant Secret and configMap kv pairs in the env variables (further elaborated upon below).
 
+_statefulset.yaml_
 ```yaml
         <snippet>
         env:
@@ -65,6 +66,7 @@ spec:
 
 Then we used this PVC claim, mount it to `/var/lib/postgresql/data` and pass the env variable PGDATA to communicate that the data should be stored on the mounted path. 
 
+_statefulset.yaml_
 ```yaml
         <snippet>
         env:
@@ -80,6 +82,8 @@ Then we used this PVC claim, mount it to `/var/lib/postgresql/data` and pass the
           claimName: postgres-pvc
         </snippet>
 ```
+
+Please note the use of PVC instead of a `volumeClaimTemplate` here. This choice is driven by the current implementation, where a single replica is created, and it's appropriate for the associated pod to utilize a dedicated PVC. As of now, scaling the stateful database is not implemented. If scalability is desired in the future, the use of a `volumeClaimTemplate` would likely be considered.
 
 Finally, we used a ClusterIP service to reach our database pods via this (cluster) IP address.
 

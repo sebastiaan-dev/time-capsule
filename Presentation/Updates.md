@@ -175,7 +175,7 @@ spec:
         - containerPort: 80
 ```
 
-Then, we updated this to the following, note that the image in spec changed and the strategy was defined:
+Then, we updated this to the following, note that the image in spec.template changed and the strategy was defined:
 
 _deployment.yaml_
 
@@ -222,8 +222,8 @@ spec:
       maxUnavailable: 0
 ```
 
-We applied this new deployment:
-`kubectl apply -f nginx-deployment.yaml --record`
+I had applied this new deployment: `kubectl apply -f nginx-deployment.yaml --record`, but if the nginx-deployment was already applied, a change to `spec.template` change **should** trigger a rolling update automatically.
+One could also not edit the yaml and run a command such as `kubectl --record --namespace=time-capsule deployment.apps/... set image deployment.v1.apps/... <image:tag>`
 
 ```bash
 $ kubectl --namespace=time-capsule rollout status deployment/frontend`
