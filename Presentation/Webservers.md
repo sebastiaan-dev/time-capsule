@@ -17,13 +17,13 @@
 - [ ] **Web UI:**
   - [ ] **2.1 Create Web UI:**
     - Using a technology of your choosing, create a Web UI that consumes the API. Common choices include Angular and React. The Web UI should be served by an application server such as nginx or Apache HTTP Server.
-  - [ ] **2.2 Containerize Web UI Application:**
+  - [x] **2.2 Containerize Web UI Application:**
     - Containerize the Web UI application + application server by choosing a suitable base image and creating a Dockerfile that installs the application distribution on the application server. For example, if you use Angular+nginx, create a multi-stage Dockerfile (with 2 FROM lines).
-  - [ ] **2.3 Create Kubernetes Deployment:**
+  - [x] **2.3 Create Kubernetes Deployment:**
     - Create a Kubernetes Deployment that initializes one or more replicas of the Web UI.
-  - [ ] **2.4 Create Kubernetes Service/Ingress:**
+  - [x] **2.4 Create Kubernetes Service/Ingress:**
     - Create a Kubernetes Service/Ingress that can be accessed by end users outside of the cluster. Consider the consumption pattern and decide whether you need just a Cluster IP, NodePort, Load Balancer, or Ingress.
-  - [ ] **2.5 Test Web UI Access:**
+  - [x] **2.5 Test Web UI Access:**
     - Test that you can access the Web UI using a web browser on a machine outside of the cluster.
 
 ## Information
