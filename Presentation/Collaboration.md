@@ -26,19 +26,19 @@
   	- Need to show with can-i. 
 
 **Hanjun:**
-- [ ] Container build and first deployment, scaling, uninstallation (Max 4 minutes).
+- [x] Container build and first deployment, scaling, uninstallation (Max 4 minutes).
 	- Second demo cluster? Resources / billing; sebastiaan checks if possible 2 make second cluster.
-	- [ ] Show how you build the container images and publish to a registry (1 point).
-	- [ ] Show how you deploy the application for the first time (1 point).
+	- [x] Show how you build the container images and publish to a registry (1 point).
+	- [x] Show how you deploy the application for the first time (1 point).
 		- Should be done with Helm, which we need to get ready after Sebastiaan finishes NetworkPolicies.
-	- [ ] **Show how to scale the application horizontally (stateless parts only) (1 point)**.
+	- [x] **Show how to scale the application horizontally (stateless parts only) (1 point)**.
 		- Change --replicas=3, could be done with Helm values; see above.
-	- [ ] Show how to uninstall the application (1 point).
+	- [x] Show how to uninstall the application (1 point).
 
-- [ ] Application upgrade and re-deployment (max 4 minutes)
+- [x] Application upgrade and re-deployment (max 4 minutes)
 	- [ ] Show how you re-build the application after a source code change (1 point).: **Sebastiaan**.
-	- [ ] Show how you upgrade the running application in two ways: deployment rollout (2 points): **Hanjun**, use `:latest` image in deployment.yaml.
-	- [ ] and canary update (2 points): **Hanjun**, use `:latest` image in deployment.yaml.
+	- [x] Show how you upgrade the running application in two ways: deployment rollout (2 points): **Hanjun**, use `:latest` image in deployment.yaml.
+	- [x] and canary update (2 points): **Hanjun**, use `:latest` image in deployment.yaml.
 
 ## When do we sync?
 - Add all files before Wendesday 17.00, then we sync via Google Meet and check to make everything submission-ready.
