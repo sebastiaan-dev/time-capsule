@@ -141,4 +141,91 @@ After exposing our service via an Ingress load balancer, we confirm that the API
 
 
 ### 🚧 Web UI
-TODO
+#### 1.1 Create Web UI
+
+#### 1.2 Containerize the Application
+
+In our multi-stage Dockerfile, including node and nginx, it builds a Docker container for Web UI, copies the application code and dependencies.
+
+We created and uploaded the image on Docker Hub. You can find it at [this link](https://hub.docker.com/r/segerritsen/time-capsule-frontend).
+
+```dockerfile
+# Seperate image for building the application
+FROM node:20.9-slim as build
+
+WORKDIR /app
+# Enable corepack for version manager
+RUN corepack enable
+# Copy required files
+COPY .yarn /.yarn
+COPY .yarnrc.yml package.json yarn.lock ./
+# Install dependencies
+RUN yarn
+# Copy source files
+COPY . .
+# Build
+RUN yarn build
+# Allow container to set environment variables
+RUN yarn add @import-meta-env/cli
+RUN npx pkg ./node_modules/@import-meta-env/cli/bin/import-meta-env.js \
+  -t node18-alpine-x64 \
+  -o import-meta-env-alpine
+
+# Use an nginx image to serve the application
+FROM nginx:1.25.2-alpine
+
+COPY .env.example start.sh /usr/share/nginx/html/
+COPY --from=build /app/import-meta-env-alpine /usr/share/nginx/html/
+COPY --from=build /app/dist /usr/share/nginx/html
+
+WORKDIR /usr/share/nginx/html/
+
+CMD ["sh", "start.sh"]
+```
+
+### 1.3 Create Kubernetes Deployment
+Creating Frontend-related pods in Kubernetes using `apply`:
+
+![Frontend Creation](includes/frontend-create.png)
+
+The default number of replicas is set to 2:
+
+
+![Deployment](includes/frontend-deploy.png)
+
+To scale the replicas up or down, use the `scale` command:
+
+![Scaling](includes/frontend-scale.png)
+
+### 1.4 Create Kubernetes Service/Ingress
+We used a ClusterIP (default) service:
+
+```yaml
+<snippet>
+spec:
+  selector:
+    app: frontend
+  ports:
+   - port: 80
+     targetPort: 80
+</snippet>
+```
+
+### 1.5 Test Web UI Access
+The default setting is ClusterIP which allows us to  `curl` the Frontend within the cluster:
+
+![test-inside](includes/frontend-test-inside.png)
+
+To test Frontend access from the outside, we could for example change the type to `NodePort` and add a `nodePort`:
+```yaml
+  type: NodePort
+  ports:
+   - port: 80
+     nodePort: 80
+     targetPort: 80
+```
+
+After exposing our service via an Ingress load balancer, we confirm that the Web frontend is also accessible from the internet:
+
+![curl-internet](includes/browser-internet.png)
+
