@@ -30,7 +30,7 @@
 
 In this section, we describe the decisions we have made and why. Note that the [Diagrams](Diagram.md) section contains additional (visual) information on the workings of the frontend, API and DB.
 
-### 🚧 API
+### API
 #### 1.1 Create REST API
 We use FastAPI to build our REST API, which consists of two API endpoints. The first one is GET `/timecapsule`, which returns all information about the capsule we have created in the following format:
 ``` python
@@ -140,8 +140,9 @@ After exposing our service via an Ingress load balancer, we confirm that the API
 ![curl-internet](includes/curl-internet.png)
 
 
-### 🚧 Web UI
+### Web UI
 #### 1.1 Create Web UI
+The Web UI is created using NodeJS, yarn package manager to install `packages.json` and it's deployed in a ligthweight Alpine linux container that runs nginx. 
 
 #### 1.2 Containerize the Application
 
