@@ -1,4 +1,4 @@
-# 🚧 Helm
+# Helm
 
 ## Assessment
 - [x] Generating the Chart
