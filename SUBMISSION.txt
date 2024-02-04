@@ -1,0 +1,14 @@
+Hi, 
+
+This file includes our submission information.
+
+1. Source code is included in this repository.
+
+2. The current URL of the public Github repository is: 
+   - https://github.com/sebastiaan-dev/time-capsule
+
+3. README with instructions to run all commands that you show in the presentation:
+   - Please navigate to the directory ./presentation. In here you will commands and additional info on all sections of our presentation.
+
+Thank you,
+Hanjun, Sebastiaan and Serge.
